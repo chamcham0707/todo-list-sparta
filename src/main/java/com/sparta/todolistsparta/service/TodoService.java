@@ -43,4 +43,17 @@ public class TodoService {
         }
         return Collections.emptyList();
     }
+
+    public TodoResponseDto editTodo(Long id, TodoRequestDto requestDto) {
+        Optional<Todo> result = todoRepository.findById(id);
+        if (result.isPresent()) {
+            Todo todo = result.get();
+            todo.Update(requestDto);
+            todoRepository.save(todo);
+            TodoResponseDto responseDto = new TodoResponseDto(todo, id);
+            return responseDto;
+        } else {
+            return null;
+        }
+    }
 }

@@ -27,4 +27,9 @@ public class TodoController {
     List<TodoResponseDto> inquiryAllTodoList() {
         return todoService.inquiryAllTodoList();
     }
+
+    @PostMapping("/todo/edit/{id}")
+    TodoResponseDto editTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+        return todoService.editTodo(id, requestDto);
+    }
 }
