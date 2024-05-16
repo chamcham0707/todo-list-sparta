@@ -7,7 +7,10 @@ import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +31,16 @@ public class TodoService {
         } else {
             return null;
         }
+    }
+
+    public List<TodoResponseDto> inquiryAllTodoList() {
+        List<Todo> results = todoRepository.findAll();
+        if (!results.isEmpty()) {
+            List<TodoResponseDto> responseDtos = results.stream()
+                    .map(todo -> new TodoResponseDto(todo)) // Assuming you have a constructor in TodoResponseDto to map from Todo
+                    .collect(Collectors.toList());
+            return responseDtos;
+        }
+        return Collections.emptyList();
     }
 }
