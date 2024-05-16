@@ -56,4 +56,14 @@ public class TodoService {
             return null;
         }
     }
+
+    public Long deleteTodo(Long id) {
+        Optional<Todo> result = todoRepository.findById(id);
+        if (result.isPresent()) {
+            todoRepository.delete(result.get());
+            return id;
+        } else {
+            return null;
+        }
+    }
 }
