@@ -31,6 +31,9 @@ dependencies {
     // Swegger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
+    // Validated
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.4'
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'

@@ -1,6 +1,7 @@
 package com.sparta.todolistsparta.exception;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -20,5 +21,10 @@ public class MyExceptionHandler {
     @ExceptionHandler(NoExistObjectException.class)
     public ResponseEntity<String> noExistHandler() {
         return ResponseEntity.status(400).body("1000");
+    }
+
+    @ExceptionHandler(ValidException.class)
+    public ResponseEntity<Object> validHandler(ObjectError objectError) {
+        return ResponseEntity.status(400).body("valid 에러");
     }
 }

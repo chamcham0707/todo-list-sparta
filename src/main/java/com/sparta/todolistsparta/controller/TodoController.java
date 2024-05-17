@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class TodoController {
 
     @Tag(name = "일정 추가", description = "일정을 추가해주는 메서드")
     @PostMapping("/todo/add")
-    TodoResponseDto addTodo(@RequestBody TodoRequestDto requestDto) {
+    TodoResponseDto addTodo(@RequestBody @Valid TodoRequestDto requestDto) {
         return todoService.addTodo(requestDto);
     }
 
@@ -45,7 +46,7 @@ public class TodoController {
             @ApiResponse(responseCode = "2000", description = "비밀번호가 일치하지 않습니다.", content = @Content(mediaType = "application/json")),
     })
     @PostMapping("/todo/edit/{id}")
-    Long editTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+    Long editTodo(@PathVariable Long id, @RequestBody @Valid TodoRequestDto requestDto) {
         return todoService.editTodo(id, requestDto);
     }
 
