@@ -14,11 +14,11 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(PasswordException.class)
     public ResponseEntity<String> passwordHandler() {
-        return ResponseEntity.status(400).body("비밀번호 인증 오류");
+        return ResponseEntity.status(400).body("2000");
     }
 
     @ExceptionHandler(NoExistObjectException.class)
     public ResponseEntity<String> noExistHandler() {
-        return ResponseEntity.status(400).body("존재하지 않습니다.");
+        return ResponseEntity.status(400).body("1000");
     }
 }

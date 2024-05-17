@@ -7,7 +7,6 @@ import com.sparta.todolistsparta.exception.NoExistObjectException;
 import com.sparta.todolistsparta.exception.PasswordException;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
