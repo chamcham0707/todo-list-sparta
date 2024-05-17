@@ -62,13 +62,18 @@ public class TodoService {
         }
     }
 
-    public Long deleteTodo(Long id) {
+    public Long deleteTodo(Long id, TodoRequestDto requestDto) {
         Optional<Todo> result = todoRepository.findById(id);
         if (result.isPresent()) {
-            todoRepository.delete(result.get());
-            return id;
+            Todo todo = result.get();
+            if (Objects.equals(todo.getPassword(), requestDto.getPassword())) {
+                todoRepository.delete(result.get());
+                return id;
+            } else {
+                return -1L;
+            }
         } else {
-            return null;
+            return -2L;
         }
     }
 }
