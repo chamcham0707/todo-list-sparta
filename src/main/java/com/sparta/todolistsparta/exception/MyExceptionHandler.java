@@ -16,4 +16,9 @@ public class MyExceptionHandler {
     public ResponseEntity<String> passwordHandler() {
         return ResponseEntity.status(400).body("비밀번호 인증 오류");
     }
+
+    @ExceptionHandler(NoExistObjectException.class)
+    public ResponseEntity<String> noExistHandler() {
+        return ResponseEntity.status(400).body("존재하지 않습니다.");
+    }
 }

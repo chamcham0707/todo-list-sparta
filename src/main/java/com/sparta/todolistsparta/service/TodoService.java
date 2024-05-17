@@ -3,6 +3,7 @@ package com.sparta.todolistsparta.service;
 import com.sparta.todolistsparta.dto.TodoRequestDto;
 import com.sparta.todolistsparta.dto.TodoResponseDto;
 import com.sparta.todolistsparta.entity.Todo;
+import com.sparta.todolistsparta.exception.NoExistObjectException;
 import com.sparta.todolistsparta.exception.PasswordException;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class TodoService {
             TodoResponseDto responseDto = new TodoResponseDto(result.get());
             return responseDto;
         } else {
-            return null;
+            throw new NoExistObjectException();
         }
     }
 
@@ -59,7 +60,7 @@ public class TodoService {
                 throw new PasswordException();
             }
         } else {
-            return -2L;
+            throw new NoExistObjectException();
         }
     }
 
@@ -74,7 +75,7 @@ public class TodoService {
                 throw new PasswordException();
             }
         } else {
-            return -2L;
+            throw new NoExistObjectException();
         }
     }
 }
