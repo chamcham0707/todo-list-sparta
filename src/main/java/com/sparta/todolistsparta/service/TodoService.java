@@ -5,10 +5,12 @@ import com.sparta.todolistsparta.dto.TodoResponseDto;
 import com.sparta.todolistsparta.entity.Todo;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -44,16 +46,19 @@ public class TodoService {
         return Collections.emptyList();
     }
 
-    public TodoResponseDto editTodo(Long id, TodoRequestDto requestDto) {
+    public Long editTodo(Long id, TodoRequestDto requestDto) {
         Optional<Todo> result = todoRepository.findById(id);
         if (result.isPresent()) {
             Todo todo = result.get();
-            todo.Update(requestDto);
-            todoRepository.save(todo);
-            TodoResponseDto responseDto = new TodoResponseDto(todo, id);
-            return responseDto;
+            if (Objects.equals(todo.getPassword(), requestDto.getPassword())) {
+                todo.Update(requestDto);
+                todoRepository.save(todo);
+                return id;
+            } else {
+                return -1L;
+            }
         } else {
-            return null;
+            return -2L;
         }
     }
 

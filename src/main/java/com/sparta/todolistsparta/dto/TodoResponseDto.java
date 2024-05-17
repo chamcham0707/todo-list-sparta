@@ -21,13 +21,4 @@ public class TodoResponseDto {
         this.admin = todo.getAdmin();
         this.createAt = todo.getCreateAt();
     }
-
-    public TodoResponseDto(Todo todo, Long id) {
-        this.todoId = todo.getTodoId();
-        this.title = todo.getTitle();
-        this.content = todo.getContent();
-        this.admin = todo.getAdmin();
-        this.createAt = todo.getCreateAt();
-        this.password = todo.getPassword();
-    }
 }

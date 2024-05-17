@@ -29,7 +29,7 @@ public class TodoController {
     }
 
     @PostMapping("/todo/edit/{id}")
-    TodoResponseDto editTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+    Long editTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
         return todoService.editTodo(id, requestDto);
     }
 
