@@ -3,6 +3,7 @@ package com.sparta.todolistsparta.service;
 import com.sparta.todolistsparta.dto.TodoRequestDto;
 import com.sparta.todolistsparta.dto.TodoResponseDto;
 import com.sparta.todolistsparta.entity.Todo;
+import com.sparta.todolistsparta.exception.PasswordException;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,7 @@ public class TodoService {
         return Collections.emptyList();
     }
 
-    public Long editTodo(Long id, TodoRequestDto requestDto) {
+    public Long editTodo(Long id, TodoRequestDto requestDto) throws PasswordException {
         Optional<Todo> result = todoRepository.findById(id);
         if (result.isPresent()) {
             Todo todo = result.get();
@@ -55,14 +56,14 @@ public class TodoService {
                 todoRepository.save(todo);
                 return id;
             } else {
-                return -1L;
+                throw new PasswordException();
             }
         } else {
             return -2L;
         }
     }
 
-    public Long deleteTodo(Long id, TodoRequestDto requestDto) {
+    public Long deleteTodo(Long id, TodoRequestDto requestDto) throws PasswordException {
         Optional<Todo> result = todoRepository.findById(id);
         if (result.isPresent()) {
             Todo todo = result.get();
@@ -70,7 +71,7 @@ public class TodoService {
                 todoRepository.delete(result.get());
                 return id;
             } else {
-                return -1L;
+                throw new PasswordException();
             }
         } else {
             return -2L;
