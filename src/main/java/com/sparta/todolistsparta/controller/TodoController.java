@@ -32,7 +32,7 @@ public class TodoController {
     })
     @GetMapping("/todo/{id}")
     ResponseEntity<TodoResponseDto> inquiryTodo(@PathVariable Long id) {
-        return ResponseEntity.status(200).body(todoService.inquiryTod(id));
+        return ResponseEntity.status(200).body(todoService.inquiryTodo(id));
     }
 
     @Tag(name = "전체 일정 조회", description = "저장된 모든 일정을 조회하는 메서드")

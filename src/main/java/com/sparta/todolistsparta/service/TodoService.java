@@ -7,17 +7,9 @@ import com.sparta.todolistsparta.exception.NoExistObjectException;
 import com.sparta.todolistsparta.exception.PasswordException;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +23,7 @@ public class TodoService {
         return responseDto;
     }
 
-    public TodoResponseDto inquiryTod(Long id) {
+    public TodoResponseDto inquiryTodo(Long id) {
         Optional<Todo> result = todoRepository.findById(id);
         if (result.isPresent()) {
             TodoResponseDto responseDto = new TodoResponseDto(result.get());

@@ -2,10 +2,14 @@ package com.sparta.todolistsparta.dto;
 
 import com.sparta.todolistsparta.entity.Todo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class TodoResponseDto {
     private Long todoId;
     private String title;
