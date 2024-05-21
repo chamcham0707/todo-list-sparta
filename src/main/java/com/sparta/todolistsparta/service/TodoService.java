@@ -7,18 +7,23 @@ import com.sparta.todolistsparta.exception.NoExistObjectException;
 import com.sparta.todolistsparta.exception.PasswordException;
 import com.sparta.todolistsparta.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
+
     public TodoResponseDto addTodo(TodoRequestDto requestDto) {
         Todo todo = new Todo(requestDto);
         todoRepository.save(todo);
@@ -37,14 +42,7 @@ public class TodoService {
     }
 
     public List<TodoResponseDto> inquiryAllTodoList() {
-        List<Todo> results = todoRepository.findAll();
-        if (!results.isEmpty()) {
-            List<TodoResponseDto> responseDtos = results.stream()
-                    .map(todo -> new TodoResponseDto(todo)) // Assuming you have a constructor in TodoResponseDto to map from Todo
-                    .collect(Collectors.toList());
-            return responseDtos;
-        }
-        return Collections.emptyList();
+        return todoRepository.findAllByOrderByModifiedAtDesc().stream().map(TodoResponseDto::new).toList();
     }
 
     public Long editTodo(Long id, TodoRequestDto requestDto) throws PasswordException {
@@ -52,7 +50,7 @@ public class TodoService {
         if (result.isPresent()) {
             Todo todo = result.get();
             if (Objects.equals(todo.getPassword(), requestDto.getPassword())) {
-                todo.Update(requestDto);
+                todo.update(requestDto);
                 todoRepository.save(todo);
                 return id;
             } else {

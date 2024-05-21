@@ -19,15 +19,17 @@ public class Todo extends Timestamped {
     private String content;
     private String admin;
     private String password;
+    private String imageSource;
 
     public Todo(TodoRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.admin = requestDto.getAdmin();
         this.password = requestDto.getPassword();
+        this.imageSource = requestDto.getImageSource();
     }
 
-    public void Update(TodoRequestDto requestDto) {
+    public void update(TodoRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.admin = requestDto.getAdmin();
